@@ -1,6 +1,7 @@
 import socket
 from concurrent.futures import ThreadPoolExecutor 
 def scan_target(ip,port):
+    sock = None
     try: 
         sock = socket.socket()
         sock.settimeout(1)
@@ -8,7 +9,7 @@ def scan_target(ip,port):
         if result == 0:
             sock.send(b"HEAD / HTTP/1.1\r\nHost: {ip}\r\n\r\n")
             banner = sock.recv(1024).decode(errors='ignore')
-            print(f"Puero {port} esta abierto en {ip}")
+            print(f"Puerto {port} esta abierto en {ip}")
             if banner:
                 print(f"Info: {banner[:50]}...")
 
